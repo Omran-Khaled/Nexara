@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="260" viewBox="0 0 1200 260" role="img" aria-label="Nexara — a living forest of literature">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a237e"/>
+      <stop offset="45%" stop-color="#4a3b8f"/>
+      <stop offset="75%" stop-color="#8a5a44"/>
+      <stop offset="100%" stop-color="#c8a26b"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2e6e3e"/>
+      <stop offset="100%" stop-color="#173a1f"/>
+    </linearGradient>
+    <radialGradient id="moon" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#fff9e6"/>
+      <stop offset="100%" stop-color="#d9c47a"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1200" height="260" fill="url(#sky)"/>
+
+  <!-- Moon -->
+  <circle cx="1020" cy="52" r="30" fill="url(#moon)" opacity="0.95"/>
+  <circle cx="1020" cy="52" r="38" fill="none" stroke="#f7ecd0" stroke-width="1" opacity="0.6"/>
+
+  <!-- Stars -->
+  <g fill="#ffffff" opacity="0.8">
+    <circle cx="120" cy="34" r="1.6"/><circle cx="210" cy="62" r="1.2"/>
+    <circle cx="330" cy="26" r="1.8"/><circle cx="452" cy="70" r="1.2"/>
+    <circle cx="540" cy="38" r="1.5"/><circle cx="660" cy="20" r="1.7"/>
+    <circle cx="740" cy="66" r="1.3"/><circle cx="855" cy="30" r="1.8"/>
+    <circle cx="928" cy="84" r="1.2"/><circle cx="1110" cy="44" r="1.5"/>
+    <circle cx="180" cy="110" r="1.1"/><circle cx="600" cy="102" r="1.3"/>
+    <circle cx="780" cy="112" r="1.1"/><circle cx="1160" cy="90" r="1.4"/>
+  </g>
+
+  <!-- Distant hills -->
+  <path d="M0 150 C 120 138 260 150 400 140 520 150 640 142 780 152 900 146 1050 154 1200 148 L1200 170 L0 170 Z" fill="#274d34" opacity="0.85"/>
+  <path d="M0 168 C 140 160 300 170 480 162 620 172 780 164 940 174 1100 168 L1200 185 L0 185 Z" fill="#1f3d29" opacity="0.9"/>
+
+  <!-- Ground -->
+  <path d="M0 190 L1200 190 L1200 260 L0 260 Z" fill="url(#ground)"/>
+
+  <!-- Pine trees (left cluster) -->
+  <g>
+    <polygon points="70,170 96,132 122,170" fill="#12301d"/>
+    <polygon points="76,150 96,120 116,150" fill="#1b4a28"/>
+    <rect x="92" y="168" width="6" height="14" fill="#4a3820"/>
+
+    <polygon points="150,160 176,122 202,160" fill="#0f2a1a"/>
+    <polygon points="156,142 176,112 196,142" fill="#1a4024"/>
+    <rect x="172" y="158" width="6" height="13" fill="#4a3820"/>
+
+    <polygon points="238,166 262,130 286,166" fill="#12301d"/>
+    <polygon points="243,148 262,120 281,148" fill="#1b4a28"/>
+    <rect x="258" y="164" width="6" height="13" fill="#4a3820"/>
+  </g>
+
+  <!-- Pine trees (right cluster) -->
+  <g>
+    <polygon points="780,158 806,120 832,158" fill="#0f2a1a"/>
+    <polygon points="786,140 806,110 826,140" fill="#1a4024"/>
+    <rect x="802" y="156" width="6" height="13" fill="#4a3820"/>
+
+    <polygon points="864,150 890,112 916,150" fill="#12301d"/>
+    <polygon points="870,132 890,102 910,132" fill="#1b4a28"/>
+    <rect x="886" y="148" width="6" height="13" fill="#4a3820"/>
+
+    <polygon points="948,164 972,128 996,164" fill="#0f2a1a"/>
+    <polygon points="953,146 972,118 991,146" fill="#1a4024"/>
+    <rect x="968" y="162" width="6" height="13" fill="#4a3820"/>
+  </g>
+
+  <!-- Large center tree (oak style) -->
+  <path d="M470 200 Q 462 176 460 160 Q 452 146 456 132 Q 466 120 480 116 Q 500 120 506 134 Q 512 150 508 172 Q 502 192 500 206 L500 212" fill="none" stroke="#5b4326" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="470" cy="112" r="44" fill="#1e5a2f"/>
+  <circle cx="470" cy="112" r="44" fill="none" stroke="#2f7d42" stroke-width="2"/>
+  <circle cx="446" cy="96" r="22" fill="#235f33"/>
+  <circle cx="494" cy="98" r="20" fill="#245f34"/>
+  <circle cx="470" cy="120" r="18" fill="#285f36"/>
+
+  <!-- Floating books around the tree -->
+  <g>
+    <rect x="410" y="150" width="26" height="10" rx="2" fill="#b5472f"/>
+    <rect x="505" y="140" width="24" height="10" rx="2" fill="#2f6bb5"/>
+    <rect x="430" y="92" width="22" height="9" rx="2" fill="#4a9d5a"/>
+    <rect x="500" y="176" width="24" height="10" rx="2" fill="#c89f3a"/>
+    <rect x="392" y="180" width="24" height="10" rx="2" fill="#8b4a8f"/>
+  </g>
+
+  <!-- Lantern path -->
+  <g>
+    <ellipse cx="600" cy="222" rx="46" ry="12" fill="#2a4a2e" opacity="0.85"/>
+    <ellipse cx="700" cy="234" rx="40" ry="10" fill="#2a4a2e" opacity="0.85"/>
+    <ellipse cx="545" cy="214" rx="34" ry="9" fill="#2a4a2e" opacity="0.85"/>
+    <circle cx="600" cy="216" r="7" fill="#ffcf6f"/>
+    <circle cx="700" cy="229" r="6" fill="#ffcf6f"/>
+    <circle cx="545" cy="209" r="5.5" fill="#ffcf6f"/>
+  </g>
+
+  <!-- Fireflies -->
+  <g fill="#ffe9a8" opacity="0.9">
+    <circle cx="330" cy="180" r="2.2"/><circle cx="420" cy="160" r="1.8"/>
+    <circle cx="560" cy="186" r="2"/><circle cx="640" cy="160" r="2.2"/>
+    <circle cx="750" cy="180" r="1.8"/><circle cx="880" cy="188" r="2"/>
+    <circle cx="250" cy="196" r="1.6"/>
+  </g>
+
+  <!-- Title block -->
+  <g>
+    <rect x="0" y="24" width="1200" height="70" fill="#ffffff" opacity="0.10"/>
+    <text x="600" y="58" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="bold" fill="#f7efd6" text-anchor="middle" letter-spacing="6">NEXARA</text>
+    <text x="600" y="84" font-family="Georgia, 'Times New Roman', serif" font-size="19" font-style="italic" fill="#e8d9a8" text-anchor="middle" letter-spacing="1.5">a living forest of literature</text>
+  </g>
+</svg>

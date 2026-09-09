@@ -1,0 +1,91 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+build/
+dist/
+.next/
+out/
+*.tsbuildinfo
+
+# Testing
+coverage/
+.nyc_output/
+
+# Environment variables
+.env*
+!.env.example
+!.env.production.example
+
+# Local data and cache
+.data/
+.cache/
+artifacts/
+assets/.aistudio/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.temp/
+tmp/
+
+# Package-manager caches and alternate lockfiles
+yarn.lock
+bun.lock
+.npm/
+.pnpm-store/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+.vs/
+.fleet/
+.aistudio/
+
+# Debug and profiling
+*.cpuprofile
+*.heapsnapshot
+
+# Metadata
+metadata.json
+
+# Deployment and tool caches
+.vercel/
+.turbo/
+.eslintcache
+
+# Misc
+.chrome-audit-profile/
+_b*.log
+_b*.txt
+_*.log
+_*.txt
+!_*.md

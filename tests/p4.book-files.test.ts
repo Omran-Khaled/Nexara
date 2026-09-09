@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import { mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { BookFileService } from '../server/services/BookFileService';
+import { MemoryBookFileRepository } from '../server/storage/BookFileRepository';
+import { LocalStorageProvider } from '../server/storage/StorageProvider';
+import { AuthorizationError, NotFoundError, ValidationError } from '../server/errors/ApplicationErrors';
+
+const admin = { id: 'admin-1', email: null, role: 'ADMIN' as const };
+const reader = { id: 'reader-1', email: null, role: 'READER' as const };
+const other = { id: 'reader-2', email: null, role: 'READER' as const };
+const main = async () => {
+  const root = await mkdtemp(join(tmpdir(), 'nexara-p4-')); let clock = 1_000_000;
+  const storage = new LocalStorageProvider(root); const repo = new MemoryBookFileRepository(); const service = new BookFileService(repo, storage, () => clock);
+  const body = Buffer.from('%PDF-1.7\nP4 test content\n%%EOF');
+  const file = await service.upload({ bookId: 'book-1', editionId: 'edition-1', format: 'PDF', mimeType: 'application/pdf', body, downloadAllowed: true, readingAllowed: true, offlineAllowed: true }, admin);
+  assert.equal(file.storageProvider, 'local-test'); assert.equal(file.sizeBytes, body.length); assert.ok(file.checksum); assert.ok(file.verifiedAt); assert.equal((file as any).storageKey.startsWith('books/book-1/editions/edition-1/files/'), true);
+  await assert.rejects(() => service.upload({ bookId: 'book-1', editionId: 'edition-1', format: 'PDF', mimeType: 'text/plain', body, downloadAllowed: true, readingAllowed: true, offlineAllowed: false }, admin), (e: unknown) => e instanceof ValidationError);
+  await assert.rejects(() => service.upload({ bookId: 'book-1', editionId: 'edition-1', format: 'PDF', mimeType: 'application/pdf', body, downloadAllowed: true, readingAllowed: false, offlineAllowed: true }, admin), (e: unknown) => e instanceof ValidationError);
+  const readGrant = await service.createGrant(file, reader, 'read', 5); const object = await service.stream(file, readGrant.token, reader, 'read'); const chunks: Buffer[] = []; for await (const chunk of object.stream) chunks.push(Buffer.from(chunk)); assert.deepEqual(Buffer.concat(chunks), body);
+  const restricted = await service.upload({ bookId: 'book-1', editionId: 'edition-1', format: 'PDF', mimeType: 'application/pdf', body: Buffer.from('%PDF-1.7\nrestricted\n%%EOF'), downloadAllowed: false, readingAllowed: true, offlineAllowed: false }, admin);
+  await assert.rejects(() => service.createGrant(restricted, other, 'download'), (e: unknown) => e instanceof AuthorizationError);
+  const downloadGrant = await service.createGrant(file, reader, 'download', 5); assert.ok(downloadGrant.token);
+  clock += 6_000; await assert.rejects(() => service.stream(file, downloadGrant.token, reader, 'download'), (e: unknown) => e instanceof AuthorizationError);
+  await assert.rejects(() => service.metadata('missing', 'edition-1', 'file-missing'), (e: unknown) => e instanceof NotFoundError);
+  await writeFile(join(root, file.storageKey), Buffer.from('corrupted')); const fresh = await service.createGrant(file, reader, 'read', 60); await assert.rejects(() => service.stream(file, fresh.token, reader, 'read'), (e: unknown) => e instanceof ValidationError);
+  await rm(root, { recursive: true, force: true }); console.log('P4 book file storage gate passed.');
+};
+main().catch((error) => { console.error(error); process.exitCode = 1; });
