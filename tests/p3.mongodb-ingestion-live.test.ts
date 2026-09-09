@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { MongoClient } from "mongodb";
 import { MongoMemoryReplSet } from "mongodb-memory-server";
+import { GutenbergDownloadService } from "../server/discovery/GutenbergDownloadService";
 import { applyP3IngestionMigration } from "../server/db/migrations";
 import { MongoBookRepository } from "../server/repositories/MongoBookRepository";
 import { MongoCatalogRepository } from "../server/repositories/CatalogRepository";
@@ -26,6 +27,14 @@ import {
 import { BookFileService } from "../server/services/BookFileService";
 import { MongoBookFileRepository } from "../server/storage/MongoBookFileRepository";
 import { LocalStorageProvider } from "../server/storage/StorageProvider";
+import { createGutenbergFixtureFetch } from "./fixtures/gutenbergLiveFixture";
+
+// The full production-shaped wiring (real MongoMemoryReplSet + repositories +
+// services + byte-for-byte checksum publish) runs with a deterministic,
+// offline-only Gutenberg/Gutendex fixture by default so CI and every machine
+// get identical results (the third-party hosts are unreliable from datacenter
+// IPs). Set NEXARA_LIVE_INGESTION_NETWORK=1 to run the real network path.
+const fetchFn = process.env.NEXARA_LIVE_INGESTION_NETWORK === "1" ? fetch : createGutenbergFixtureFetch();
 
 const memory = await MongoMemoryReplSet.create({ replSet: { count: 1 } });
 const client = new MongoClient(memory.getUri());
@@ -40,7 +49,7 @@ try {
   // durable file record (MongoDB) + bytes (storage provider), rights record.
   const pipeline = new IngestionService(
     new MongoIngestionRepository(db),
-    new GutenbergIngestionSourceGateway(),
+    new GutenbergIngestionSourceGateway(new GutenbergDownloadService(fetchFn), fetchFn),
     new MongoIngestionPublisher(new MongoCatalogRepository(db)),
     new BookService(bookRepository),
     new RightsService(bookRepository, new MongoRightsRepository(db), audit),
