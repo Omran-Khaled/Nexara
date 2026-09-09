@@ -15,15 +15,19 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@v4
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22.13.0'
-          cache: npm
+          cache: pnpm
       - name: Install locked dependencies
-        run: npm ci --ignore-scripts
+        run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Run full acceptance matrix
-        run: npm run test:all
+        run: pnpm run test:all
       - name: Upload audit evidence
         if: always()
         uses: actions/upload-artifact@v4
