@@ -11,6 +11,7 @@
                     "preview":  "vite preview",
                     "clean":  "rm -rf dist server.js",
                     "lint":  "tsc --noEmit",
+                    "typecheck":  "tsc --noEmit",
                     "db:migrate":  "tsx scripts/migrate-mongodb.ts",
                     "db:seed":  "tsx scripts/seed-mongodb.ts",
                     "catalog:ingest":  "tsx scripts/catalog-ingest.ts",

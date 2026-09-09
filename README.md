@@ -17,7 +17,7 @@ discovery, a rights‑cleared catalogue, checksum‑verified content, and a dist
 [![MongoDB](https://img.shields.io/badge/MongoDB-7-47a248?style=flat&logo=mongodb&logoColor=47a248)](https://www.mongodb.com/)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-[![Acceptance P0–P17](https://github.com/nexara/nexara/actions/workflows/acceptance.yml/badge.svg)](.github/workflows/acceptance.yml)
+[![Acceptance P0–P17](https://github.com/Omran-Khaled/Nexara/actions/workflows/acceptance.yml/badge.svg)](.github/workflows/acceptance.yml)
 
 </div>
 
@@ -227,8 +227,8 @@ A single MongoDB database (default `nexara`, ~30 collections) across **five conc
 ### 1 · Clone & install
 
 ```bash
-git clone https://github.com/nexara/nexara.git
-cd nexara
+git clone https://github.com/Omran-Khaled/Nexara.git
+cd Nexara
 npm ci --ignore-scripts      # locked install
 cp .env.example .env         # then edit; .env is gitignored, never committed
 ```

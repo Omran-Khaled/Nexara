@@ -1,6 +1,9 @@
+# pnpm build-approval policy (supply-chain hardening).
+# Only packages listed below may run (pre/post)install scripts.
+# All were reviewed as trusted upstream packages required by this project.
 allowBuilds:
-  '@google/genai': set this to true or false
-  core-js: set this to true or false
-  esbuild: set this to true or false
-  mongodb-memory-server: set this to true or false
-  protobufjs: set this to true or false
+  '@google/genai': true
+  core-js: true
+  esbuild: true
+  mongodb-memory-server: true
+  protobufjs: true
