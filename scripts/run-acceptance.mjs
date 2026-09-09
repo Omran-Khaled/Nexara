@@ -96,7 +96,7 @@ const P0_P10_MATRIX = [
   'npm run test:p9',
   'npm run test:p10',
   'npm run build',
-  'npm audit --omit=dev --audit-level=high',
+  'pnpm audit --prod --audit-level high',
 ];
 
 function runMatrix() {
